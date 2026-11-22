@@ -1,0 +1,9 @@
+{
+  "name": "ud-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "google-auth-library": "9.15.1",
+    "web-push": "3.6.7"
+  }
+}
