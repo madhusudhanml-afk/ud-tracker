@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   const b = req.body || {};
   try {
     const d = req.method === 'GET' ? await callScript({ api: 'listusers', email })
-      : await callScript({ api: b.remove ? 'removeuser' : 'adduser', email, target: String(b.email || ''), admin: b.admin ? '1' : '0' });
+      : await callScript({ api: b.remove ? 'removeuser' : 'adduser', email, target: String(b.email || ''), role: ['viewer', 'editor', 'admin'].includes(b.role) ? b.role : 'viewer' });
     if (d && d.error === 'forbidden') { res.setHeader('Set-Cookie', clearCookie); return res.status(401).json({ error: 'forbidden' }); }
     if (d && d.error === 'not_admin') return res.status(403).json({ error: 'not_admin' });
     if (d && d.error) return res.status(400).json({ error: d.error });
